@@ -5,7 +5,7 @@ import megrok.menu
 import megrok.z3cform
 
 import dolmen.content as content
-from dolmen.app.layout import ContentActions, ApplicationAwareView, IForm
+from dolmen.app.layout import ContentActions, ApplicationAwareView, Form
 
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
@@ -14,11 +14,10 @@ from zope.traversing.browser import AbsoluteURL
 _ = MessageFactory("dolmen")
 
 
-class Delete(megrok.z3cform.PageForm, ApplicationAwareView):
+class Delete(Form):
     grok.title(_(u"Delete"))
     megrok.menu.menuitem(ContentActions, order=80)
     grok.context(content.IBaseContent)
-    grok.implements(IForm)
     grok.require('dolmen.content.Delete')
 
     label = _(u"Confirm deletion")
