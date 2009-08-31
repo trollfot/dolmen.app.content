@@ -1,63 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import grok
-import zope.dublincore.interfaces as dc
+import grokcore.view as grok
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 
-import dolmen.forms.crud as crud
-from dolmen.forms.composed import ComposedForm
-from dolmen.content import IContainer, IContent
+from dolmen.content import IContainer
 from dolmen.app.layout import models
 from dolmen.app.layout import ContentActions, menuitem, ISortable
-
-from z3c.form import field
 from megrok.z3ctable import NameColumn, LinkColumn, ModifiedColumn
 
 _ = MessageFactory("dolmen")
-
-
-class Metadata(ComposedForm, models.TabView):
-    grok.name('metadata')
-    grok.title(_(u"Metadata"))
-    grok.context(IContent)
-    grok.require('dolmen.content.Edit')
-
-    label = 'Metadata Editing'
-    form_name = 'Edit the general dublincore metadata'
-
-
-class DescriptionMetadata(models.SubForm, crud.Edit):
-    grok.view(Metadata)
-    grok.context(IContent)
-    grok.name('metadata.description')
-    grok.order(10)
-
-    label = "Content description"
-    form_name = "Content description"
-    fields = field.Fields(dc.IDCDescriptiveProperties)
-    
-
-class PublishingMetadata(models.SubForm, crud.Edit):
-    grok.view(Metadata)
-    grok.context(IContent)
-    grok.name('metadata.publishing')
-    grok.order(20)
-
-    label = "Publishing informations"
-    form_name = "Publishing informations"
-    fields = field.Fields(dc.IDCPublishing)
-
-
-class ExtendedMetadata(models.SubForm, crud.Edit):
-    grok.view(Metadata)
-    grok.context(IContent)
-    grok.name('metadata.extended')
-    grok.order(30)
-
-    label = "Extended metadata"
-    form_name = "Extended metadata"
-    fields = field.Fields(dc.IDCExtended)
 
 
 class FolderListing(models.TablePage):
