@@ -2,14 +2,14 @@
 
 import grok
 import megrok.menu
-import megrok.z3cform
-
 import dolmen.content as content
-from dolmen.app.layout import ContentActions, ApplicationAwareView, Form
 
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 from zope.traversing.browser import AbsoluteURL
+
+from megrok.z3cform.base import button
+from dolmen.app.layout import ContentActions, ApplicationAwareView, Form
 
 _ = MessageFactory("dolmen")
 
@@ -24,7 +24,7 @@ class Delete(Form):
     form_name = _(u"Are you really sure ?")
     fields = {}
 
-    @megrok.z3cform.button.buttonAndHandler(_('Confirm'), name='confirm')
+    @button.buttonAndHandler(_('Confirm'), name='confirm')
     def handleConfirm(self, action):
         container = self.context.__parent__
         name = self.context.__name__
