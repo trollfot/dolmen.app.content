@@ -31,6 +31,10 @@ class FolderListing(models.TablePage):
     def values(self):
         return self.context.values()
 
+    
+    def render(self):
+        return self.renderTable()
+
 
 class Title(LinkColumn):
     """Display the name of the content item
