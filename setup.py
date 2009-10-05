@@ -24,6 +24,7 @@ setup(name = name,
       zip_safe = False,
       install_requires=[
           'setuptools',
+          'dolmen.blob',
           'dolmen.content',
           'dolmen.imaging',
           'dolmen.app.layout',

@@ -8,15 +8,15 @@ from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 from zope.traversing.browser import AbsoluteURL
 
-from megrok.z3cform.base import button
-from dolmen.app.layout import ContentActions, ApplicationAwareView, Form
+from dolmen.forms.base import button
+from dolmen.app.layout import ApplicationAwareView, Form, TabView
 
 _ = MessageFactory("dolmen")
 
 
-class Delete(Form):
+class Delete(Form, TabView):
+    grok.order(80)
     grok.title(_(u"Delete"))
-    megrok.menu.menuitem(ContentActions, order=80)
     grok.context(content.IBaseContent)
     grok.require('dolmen.content.Delete')
 
