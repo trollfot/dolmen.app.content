@@ -28,6 +28,7 @@ setup(name = name,
           'dolmen.content',
           'dolmen.imaging',
           'dolmen.app.layout',
+          'dolmen.blob',
       ],
       classifiers = [
         'Development Status :: 4 - Beta',
