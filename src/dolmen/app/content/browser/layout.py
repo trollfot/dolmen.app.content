@@ -54,7 +54,7 @@ class DisplayOptions(grok.Viewlet):
 
     def update(self):
         self.contexturl = absoluteURL(self.context, self.request)
-        menu = getUtility(IBrowserMenu, 'display')
+        menu = getUtility(IBrowserMenu, 'display-options')
         self.actions = menu.getMenuItems(self.context, self.request)
         self.selected = self.context.layout
         if (len(self.actions) == 1 and

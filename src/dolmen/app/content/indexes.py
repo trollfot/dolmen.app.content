@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import grok
 from grok import index
 from dolmen.app.site import IDolmen
@@ -26,4 +29,4 @@ class BaseSearchable(grok.Adapter):
     grok.context(IBaseContent)
 
     def getSearchableText(self):
-         return self.context.title
+        return self.context.title
