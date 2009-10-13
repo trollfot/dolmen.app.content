@@ -8,7 +8,7 @@ history = open(join('docs', 'HISTORY.txt')).read().replace(name + ' - ', '')
 
 setup(name = name,
       version = version,
-      description = 'Dolmen CMS content types',
+      description = 'Dolmen CMS content utilities',
       long_description = readme[readme.find('\n\n'):] + '\n' + history,
       keywords = 'Grok Zope3 CMS Dolmen',
       author = 'Souheil Chelfouh',

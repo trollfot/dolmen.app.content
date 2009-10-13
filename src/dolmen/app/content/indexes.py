@@ -5,19 +5,18 @@ import grok
 from grok import index
 from dolmen.app.site import IDolmen
 from dolmen.content import IBaseContent
-from zope.component import getUtility, getSiteManager
-from zope.app.intid.interfaces import IIntIds
 from zope.index.text.interfaces import ISearchableText
 
 
-class BaseObjectIndexes(grok.Indexes):
+class BaseIndexes(grok.Indexes):
     grok.site(IDolmen)
     grok.context(IBaseContent)
     
     title = index.Text()
+    content_type = index.Field(attribute='__content_type__')
 
 
-class SearchableIndexes(grok.Indexes):
+class SearchableIndex(grok.Indexes):
     grok.site(IDolmen)
     grok.context(ISearchableText)
     

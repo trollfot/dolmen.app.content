@@ -1,8 +1,0 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:grok="http://namespaces.zope.org/grok">
-
-  <include package="dolmen.forms.crud" />
-  <include package="megrok.z3cform.composed" file="meta.zcml" />
-  <include package="z3c.table" />
-  
-</configure>

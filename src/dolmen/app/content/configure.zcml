@@ -3,7 +3,6 @@
 
   <include package="grok" />
   <include package="dolmen.content" />
-  <include package=".browser" />
   <grok:grok package="." />
   
 </configure>
