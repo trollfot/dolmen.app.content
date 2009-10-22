@@ -24,10 +24,12 @@ setup(name = name,
       zip_safe = False,
       install_requires=[
           'setuptools',
+          'dolmen.file',
           'dolmen.blob',
           'dolmen.content',
           'dolmen.thumbnailer',
           'dolmen.app.layout',
+          'dolmen.forms.crud',
       ],
       classifiers = [
         'Development Status :: 4 - Beta',

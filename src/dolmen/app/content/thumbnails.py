@@ -4,9 +4,11 @@ import grokcore.component as grok
 
 from PIL import Image
 from cStringIO import StringIO
+from dolmen.file import IImageField
 from dolmen.blob import BlobFile
 from dolmen.content import IBaseContent
-from dolmen.thumbnailer import Miniaturizer, IThumbnailer
+from dolmen.forms.crud import IFieldUpdate
+from dolmen.thumbnailer import Miniaturizer, IImageMiniaturizer, IThumbnailer
 
 
 class BlobMiniaturizer(Miniaturizer):
@@ -59,3 +61,27 @@ class SquareThumbnailer(grok.Adapter):
         image.save(thumbnailIO, original.format, quality=90)
         thumbnailIO.seek(0)        
         return thumbnailIO
+
+
+class ThumbnailsGeneration(grok.MultiAdapter):
+    """Event handler triggering the thumbnail generation
+    """
+    grok.adapts(IBaseContent, IImageField)
+    grok.provides(IFieldUpdate)
+    
+    def __init__(self, object, field):
+        self.object = object
+        self.field = field
+
+    def update(self):
+        name = self.field.__name__
+        original = getattr(self.object, name, None)
+        handler = IImageMiniaturizer(self.object)
+    
+        # The image has been deleted if 'original' is None
+        if original is None:
+            # We delete the thumbnails.
+            handler.delete(fieldname=name)
+        else:
+            # We generate the thumbnails.
+            handler.generate(fieldname=name)
