@@ -6,7 +6,7 @@ from PIL import Image
 from cStringIO import StringIO
 from dolmen.blob import BlobFile
 from dolmen.content import IBaseContent
-from dolmen.imaging import Miniaturizer, IThumbnailer
+from dolmen.thumbnailer import Miniaturizer, IThumbnailer
 
 
 class BlobMiniaturizer(Miniaturizer):
