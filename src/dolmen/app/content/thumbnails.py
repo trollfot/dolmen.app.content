@@ -24,7 +24,7 @@ class BlobMiniaturizer(Miniaturizer):
               'mini'   : (250, 250),
               'thumb'  : (150, 150),
               'small'  : (128, 128),
-              'square' : ( 80,  80),
+              'square' : ( 64,  64),
               }
 
 
