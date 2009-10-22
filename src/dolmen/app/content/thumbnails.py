@@ -11,7 +11,7 @@ from dolmen.thumbnailer import Miniaturizer, IThumbnailer
 
 class BlobMiniaturizer(Miniaturizer):
     """A thumbnailer made for the Dolmen CMS.
-    It adds a 80*80 scale and it stores the thumbnails in blobs.
+    It adds a 64*64 scale and it stores the thumbnails in blobs.
     """
     grok.context(IBaseContent)
 
