@@ -5,7 +5,7 @@ import grokcore.component as grok
 from PIL import Image
 from cStringIO import StringIO
 from dolmen.file import IImageField
-from dolmen.blob import BlobFile
+from dolmen.blob import BlobValue
 from dolmen.content import IBaseContent
 from dolmen.forms.crud import IFieldUpdate
 from dolmen.thumbnailer import Miniaturizer, IImageMiniaturizer, IThumbnailer
@@ -18,7 +18,7 @@ class BlobMiniaturizer(Miniaturizer):
     grok.context(IBaseContent)
 
     # We store in blob
-    factory = BlobFile
+    factory = BlobValue
 
     # We add a new size
     scales = {'large'  : (700, 700),
