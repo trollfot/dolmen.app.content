@@ -76,10 +76,10 @@ Let's introspect our Miniaturized component::
   >>> from dolmen.app.content import thumbnails
 
   >>> thumbnails.BlobMiniaturizer.factory
-  <class 'dolmen.blob.file.BlobFile'>
+  <class 'dolmen.blob.file.BlobValue'>
 
   >>> print thumbnails.BlobMiniaturizer.scales
-  {'mini': (250, 250), 'square': (80, 80), 'thumb': (150, 150), 'large': (700, 700), 'small': (128, 128), 'preview': (400, 400)}
+  {'mini': (250, 250), 'square': (64, 64), 'thumb': (150, 150), 'large': (700, 700), 'small': (128, 128), 'preview': (400, 400)}
 
 The new scale, 'square', scales down and crops the original image to
 provide a square thumbnail. This is down using a IThumbnailer adapter.

@@ -13,7 +13,7 @@ from dolmen.thumbnailer import Miniaturizer, IImageMiniaturizer, IThumbnailer
 
 class BlobMiniaturizer(Miniaturizer):
     """Miniaturizer handler for `dolmen.content.IBaseContent` objects.
-    It adds a 80*80 scale (square) and stores the thumbnails in blobs.
+    It adds a 64*64 scale (square) and stores the thumbnails in blobs.
     """
     grok.context(IBaseContent)
 
