@@ -46,7 +46,7 @@ Searchable text
 ---------------
 
 `dolmen.app.content` provides a simple 'ISearchableText'
-implementation, allowing full text searches. It comes in two parts::
+implementation, allowing full text searches. It comes in two parts.
 
 The index::
 
@@ -71,7 +71,7 @@ scale.
 Scales
 ------
 
-Let's introspect our Miniaturized component::
+Let's introspect our Miniaturizer component::
 
   >>> from dolmen.app.content import thumbnails
 
@@ -82,7 +82,7 @@ Let's introspect our Miniaturized component::
   {'mini': (250, 250), 'square': (64, 64), 'thumb': (150, 150), 'large': (700, 700), 'small': (128, 128), 'preview': (400, 400)}
 
 The new scale, 'square', scales down and crops the original image to
-provide a square thumbnail. This is down using a IThumbnailer adapter.
+provide a square thumbnail. This is done using a IThumbnailer adapter::
 
   >>> from dolmen.thumbnailer import IThumbnailer	
   >>> thumbnails.SquareThumbnailer
