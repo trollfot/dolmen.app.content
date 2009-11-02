@@ -4,19 +4,21 @@ import grok
 
 from PIL import Image
 from cStringIO import StringIO
-from dolmen.blob import BlobFile
+from dolmen.file import IImageField
+from dolmen.blob import BlobValue
 from dolmen.content import IBaseContent
-from dolmen.thumbnailer import Miniaturizer, IThumbnailer
+from dolmen.forms.base import IFieldUpdate
+from dolmen.thumbnailer import Miniaturizer, IImageMiniaturizer, IThumbnailer
 
 
 class BlobMiniaturizer(Miniaturizer):
-    """A thumbnailer made for `dolmen.content.IBaseContent` objects.
-    It adds a 80*80 scale (square) and it stores the thumbnails in blobs.
+    """Miniaturizer handler for `dolmen.content.IBaseContent` objects.
+    It adds a 80*80 scale (square) and stores the thumbnails in blobs.
     """
     grok.context(IBaseContent)
 
     # We store in blob
-    factory = BlobFile
+    factory = BlobValue
 
     # We add a new size
     scales = {'large'  : (700, 700),
@@ -24,7 +26,7 @@ class BlobMiniaturizer(Miniaturizer):
               'mini'   : (250, 250),
               'thumb'  : (150, 150),
               'small'  : (128, 128),
-              'square' : ( 80,  80),
+              'square' : ( 64,  64),
               }
 
 
@@ -59,3 +61,21 @@ class SquareThumbnailer(grok.Adapter):
         image.save(thumbnailIO, original.format, quality=90)
         thumbnailIO.seek(0)        
         return thumbnailIO
+
+
+@grok.implementer(IFieldUpdate)
+@grok.adapter(IBaseContent, IImageField)
+def ThumbnailsGeneration(object, field):
+    """Event handler triggering the thumbnail generation
+    """
+    name = field.__name__
+    original = getattr(object, name, None)
+    handler = IImageMiniaturizer(object)
+    
+    # The image has been deleted if 'original' is None
+    if original is None:
+        # We delete the thumbnails.
+        handler.delete(fieldname=name)
+    else:
+        # We generate the thumbnails.
+        handler.generate(fieldname=name)
