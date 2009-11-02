@@ -89,3 +89,9 @@ provide a square thumbnail. This is down using a IThumbnailer adapter.
   <class 'dolmen.app.content.thumbnails.SquareThumbnailer'>
   >>> IThumbnailer.implementedBy(thumbnails.SquareThumbnailer)
   True
+
+
+Credits
+=======
+
+All Dolmen packages are sponsorised by NPAI (http://www.npai.fr)
