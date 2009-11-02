@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import grokcore.component as grok
+import grok
 
 from PIL import Image
 from cStringIO import StringIO
@@ -10,8 +10,8 @@ from dolmen.thumbnailer import Miniaturizer, IThumbnailer
 
 
 class BlobMiniaturizer(Miniaturizer):
-    """A thumbnailer made for the Dolmen CMS.
-    It adds a 80*80 scale and it stores the thumbnails in blobs.
+    """A thumbnailer made for `dolmen.content.IBaseContent` objects.
+    It adds a 80*80 scale (square) and it stores the thumbnails in blobs.
     """
     grok.context(IBaseContent)
 

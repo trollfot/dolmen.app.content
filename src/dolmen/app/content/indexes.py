@@ -9,6 +9,8 @@ from zope.index.text.interfaces import ISearchableText
 
 
 class BaseIndexes(grok.Indexes):
+    """Indexes the title and the content type of an IBaseContent content.
+    """
     grok.site(IDolmen)
     grok.context(IBaseContent)
     
@@ -17,6 +19,8 @@ class BaseIndexes(grok.Indexes):
 
 
 class SearchableIndex(grok.Indexes):
+    """Indexes the searchable text of an ISearchableText content.
+    """
     grok.site(IDolmen)
     grok.context(ISearchableText)
     
@@ -24,8 +28,13 @@ class SearchableIndex(grok.Indexes):
 
 
 class BaseSearchable(grok.Adapter):
+    """Provides the needed ISearchableText methods for and IBaseContent.
+    """
     grok.implements(ISearchableText)
     grok.context(IBaseContent)
 
     def getSearchableText(self):
         return self.context.title
+
+
+__all__ = ['BaseIndexes', 'SearchableIndex', 'BaseSearchable']
