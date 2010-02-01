@@ -1,19 +1,20 @@
-import os.path
-import unittest
-import doctest
-from zope.app.testing import functional
+# -*- coding: utf-8 -*-
 
-ftesting_zcml = os.path.join(os.path.dirname(__file__), 'ftesting.zcml')
-FunctionalLayer = functional.ZCMLLayer(
-    ftesting_zcml, __name__, 'FunctionalLayer', allow_teardown=True
-    )
+import unittest
+import dolmen.app.content
+from zope.component.testlayer import ZCMLFileLayer
+from zope.testing import doctest
+
+
+class DolmenAppContentLayer(ZCMLFileLayer):
+    pass
+
 
 def test_suite():
     suite = unittest.TestSuite()
-    readme = functional.FunctionalDocFileSuite(
+    readme = doctest.DocFileSuite(
         'README.txt',
-        globs={'__name__':'dolmen.app.content.tests'},
-        )
-    readme.layer = FunctionalLayer
+        optionflags=(doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS))
+    readme.layer = ZCMLFileLayer(dolmen.app.content)
     suite.addTest(readme)
     return suite

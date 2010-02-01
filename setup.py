@@ -2,27 +2,29 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'dolmen.app.content'
-version = '0.2dev'
+version = '0.2'
 readme = open(join('src', 'dolmen', 'app', 'content', 'README.txt')).read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 install_requires = [
-    'setuptools',
-    'grok',
     'PILwoTk',
-    'zope.index',
+    'dolmen.app.site>=0.1',
     'dolmen.blob>=0.2.1',
     'dolmen.content>=0.2.2',
-    'dolmen.forms.crud>=0.2',
+    'dolmen.file',
+    'dolmen.forms.base',
     'dolmen.thumbnailer>=0.2.1',
-    'dolmen.app.site>=0.1',
-    'dolmen.app.layout>=0.2',
+    'grok',
+    'setuptools',
+    'zope.index',
     ]
 
-tests_require = install_requires + [
+tests_require = [
+    'dolmen.forms.crud>=0.2',
+    'zope.component',
+    'zope.i18n',
+    'zope.security',
     'zope.testing',
-    'zope.app.testing',
-    'zope.app.zcmlfiles'
     ]
 
 setup(name = name,
