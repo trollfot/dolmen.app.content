@@ -13,7 +13,7 @@ class BaseIndexes(grok.Indexes):
     """
     grok.site(IDolmen)
     grok.context(IBaseContent)
-    
+
     title = index.Text()
     content_type = index.Field(attribute='__content_type__')
 
@@ -23,7 +23,7 @@ class SearchableIndex(grok.Indexes):
     """
     grok.site(IDolmen)
     grok.context(ISearchableText)
-    
+
     searchabletext = index.Text(attribute="getSearchableText")
 
 

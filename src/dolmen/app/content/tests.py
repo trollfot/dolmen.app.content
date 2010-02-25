@@ -14,7 +14,7 @@ def test_suite():
     suite = unittest.TestSuite()
     readme = doctest.DocFileSuite(
         'README.txt',
-        optionflags=(doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS))
+        optionflags=(doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS))
     readme.layer = ZCMLFileLayer(dolmen.app.content)
     suite.addTest(readme)
     return suite
