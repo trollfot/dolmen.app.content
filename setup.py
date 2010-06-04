@@ -9,22 +9,32 @@ history = open(join('docs', 'HISTORY.txt')).read()
 install_requires = [
     'PIL',
     'dolmen.app.site >= 0.1',
-    'dolmen.blob >= 0.2.1',
-    'dolmen.content >= 0.2.2',
-    'dolmen.file',
+    'dolmen.blob >= 0.5',
+    'dolmen.content >= 0.3.1',
+    'dolmen.file >= 0.5',
     'dolmen.forms.base',
     'dolmen.thumbnailer >= 0.2.1',
     'grok',
+    'grokcore.component',
+    'grokcore.formlib',
+    'martian',
     'setuptools',
+    'zope.browserresource',
     'zope.index',
+    'zope.interface',
     ]
 
 tests_require = [
-    'dolmen.forms.crud >= 0.2',
+    'zope.annotation',
+    'zope.browserpage',
     'zope.component',
     'zope.i18n',
+    'zope.publisher',
+    'zope.schema',
     'zope.security',
+    'zope.site',
     'zope.testing',
+    'zope.traversing',
     ]
 
 setup(name = name,

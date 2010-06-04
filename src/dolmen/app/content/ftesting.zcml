@@ -12,7 +12,6 @@
   <include package="zope.security" />
   <include package="zope.annotation" />
   <include package="zope.traversing.browser" />
-  <include package="dolmen.forms.crud" />
   <include package="dolmen.app.content" />
 
   <!-- Dublincore annotators without all the zmi thing -->
