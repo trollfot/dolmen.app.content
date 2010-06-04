@@ -151,6 +151,20 @@ Now, we check if our content has a given icon::
   >>> icon_view()
   '<img src="http://127.0.0.1/dolmen-app-content-IContentSchema-icon.png" alt="ContentSchema" width="16" height="16" border="0" />'
 
+Trying to register an icon file that doesn't exist or cannot resolve
+will lead to an error::
+
+  >>> class AnotherContent(dolmen.content.Content):
+  ...  """Another content with an icon
+  ...  """
+  ...  dolmen.content.schema(IContentSchema)
+  ...  dolmen.content.name("a simple content type")
+  ...  icon('someimaginary thing.png')
+  Traceback (most recent call last):
+  ...
+  GrokImportError: Directive 'icon' cannot resolve the file 'someimaginary thing.png'.
+
+
 Credits
 =======
 

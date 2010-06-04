@@ -2,11 +2,10 @@
 
 import os.path
 import martian
+
 from sys import modules
 from dolmen import content
-from dolmen.content import IFactory
 from martian.directive import StoreOnce
-from zope.interface import Interface, verify
 
 
 def get_absolute_path(filename, pyfile=__file__):
@@ -27,8 +26,7 @@ class FileValueStoreOnce(StoreOnce):
         if path is None:
             raise martian.error.GrokImportError(
                 "Directive %r cannot resolve the file %r." %
-                (directive.name, value)
-                )
+                (directive.name, value))
         StoreOnce.set(self, locals_, directive, path)
 
 
