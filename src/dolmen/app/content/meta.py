@@ -13,7 +13,8 @@ class ContentIconGrokker(martian.ClassGrokker):
     martian.directive(icon)
 
     def execute(self, class_, config, icon, **kw):
-        specialized = formlib.most_specialized_interfaces(class_)
-        register_icon(config, 'icon', specialized[0], file=icon)
-        directlyProvides(class_, specialized[0])
+        if icon:
+            specialized = formlib.most_specialized_interfaces(class_)
+            register_icon(config, 'icon', specialized[0], file=icon)
+            directlyProvides(class_, specialized[0])
         return True

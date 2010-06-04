@@ -1,11 +1,18 @@
 Changelog
 =========
 
+1.0a2 (2010-06-04)
+------------------
+
+* Corrected the icon grokker that failed if the icon directive was not
+  set on a content.
+
+
 1.0a1 (2010-06-04)
 ------------------
 
-* dolmen.app.content now defines the icon directive that used to live
-  in dolmen.content. Added tests to demonstrate the new feature.
+* ``dolmen.app.content`` now defines the icon directive that used to live
+  in ``dolmen.content``. Added tests to demonstrate the new feature.
 
 
 0.2.1 (2010-02-25)
