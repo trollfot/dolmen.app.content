@@ -11,15 +11,23 @@ Getting started
 We import Grok and grok the package::
 
   >>> import grok
-  >>> grok.testing.grok('dolmen.app.content')
+  >>> from grokcore.component import testing
+  >>> from zope.component.hooks import getSite
 
 We create a `dolmen.content` content::
 
   >>> import dolmen.content
   >>> class Mammoth(dolmen.content.Content):
   ...    grok.name('A furry thing')
+
+  >>> testing.grok_component("mammoth", Mammoth)
+  True
+
   >>> manfred = Mammoth()
   >>> manfred.title = u'A nice mammoth'
+
+  >>> site = getSite()
+  >>> site['manfred'] = manfred
 
 Indexes
 =======
@@ -90,6 +98,58 @@ provide a square thumbnail. This is done using a IThumbnailer adapter::
   >>> IThumbnailer.implementedBy(thumbnails.SquareThumbnailer)
   True
 
+
+Icon registration
+=================
+
+``dolmen.app.content`` allows you to register an icon for your content type.
+
+The default value
+-----------------
+
+  >>> from dolmen.app.content import icon
+  >>> icon.bind().get(manfred)
+  '...content.png'
+
+
+Retrieving the icon
+-------------------
+
+  >>> from zope.publisher.browser import TestRequest
+  >>> from zope.component import getMultiAdapter
+
+  >>> request = TestRequest()
+  >>> icon_view = getMultiAdapter((manfred, request), name="icon")
+  >>> icon_view()
+  '<img src="http://127.0.0.1/dolmen-content-interfaces-IContent-icon.png" alt="Content" width="16" height="16" border="0" />'
+
+
+Defining a content icon
+-----------------------
+
+Let's demonstrate the icon registration with a simple test::
+
+  >>> from zope import schema
+
+  >>> class IContentSchema(dolmen.content.IBaseContent):
+  ...    text = schema.Text(title=u"A body text", default=u"N/A")
+
+  >>> class MyContent(dolmen.content.Content):
+  ...  """A simple content with an icon
+  ...  """
+  ...  dolmen.content.schema(IContentSchema)
+  ...  dolmen.content.name("a simple content type")
+  ...  icon('container.png')
+
+  >>> testing.grok_component("mycontent", MyContent)
+  True
+
+Now, we check if our content has a given icon::
+
+  >>> elephant = site['elephant'] = MyContent()
+  >>> icon_view = getMultiAdapter((elephant, request), name="icon")
+  >>> icon_view()
+  '<img src="http://127.0.0.1/dolmen-app-content-IContentSchema-icon.png" alt="ContentSchema" width="16" height="16" border="0" />'
 
 Credits
 =======
