@@ -41,3 +41,4 @@ class icon(martian.Directive):
 
 icon.set(content.Content, get_absolute_path('content.png'))
 icon.set(content.Container, get_absolute_path('container.png'))
+icon.set(content.OrderedContainer, get_absolute_path('container.png'))

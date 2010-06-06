@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0a3 (2010-06-04)
+------------------
+
+* Added an icon for the OrderedContainer type.
+
+
 1.0a2 (2010-06-04)
 ------------------
 
