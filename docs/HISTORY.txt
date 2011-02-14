@@ -8,7 +8,7 @@ Changelog
 
 * ``dolmen.app.content`` now defines the `IDescriptiveSchema`
   interface that provides the ``zope.dublincore``
-  `IDCDescriptiveAttributes` interface. This is to be used instead of
+  `IDCDescriptiveProperties` interface. This is to be used instead of
   the old `IBaseContent` from ``dolmen.content``.
 
 * The indexes now use the new `IDescriptiveSchema` interface. Please
