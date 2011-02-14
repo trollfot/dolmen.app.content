@@ -6,7 +6,7 @@ from PIL import Image
 from cStringIO import StringIO
 from dolmen.file import IImageField
 from dolmen.blob import BlobValue
-from dolmen.content import IBaseContent
+from dolmen.content import IContent
 from dolmen.forms.base import IFieldUpdate
 from dolmen.thumbnailer import Miniaturizer, IImageMiniaturizer, IThumbnailer
 
@@ -15,7 +15,7 @@ class BlobMiniaturizer(Miniaturizer):
     """Miniaturizer handler for `dolmen.content.IBaseContent` objects.
     It adds a 64*64 scale (square) and stores the thumbnails in blobs.
     """
-    grok.context(IBaseContent)
+    grok.context(IContent)
 
     # We store in blob
     factory = BlobValue
@@ -34,7 +34,7 @@ class SquareThumbnailer(grok.Adapter):
     """A named thumbnailer that will crop images to the given size.
     """
     grok.name('square')
-    grok.context(IBaseContent)
+    grok.context(IContent)
     grok.implements(IThumbnailer)
 
     def scale(self, original, size):
@@ -64,7 +64,7 @@ class SquareThumbnailer(grok.Adapter):
 
 
 @grok.implementer(IFieldUpdate)
-@grok.adapter(IBaseContent, IImageField)
+@grok.adapter(IContent, IImageField)
 def ThumbnailsGeneration(object, field):
     """Event handler triggering the thumbnail generation
     """

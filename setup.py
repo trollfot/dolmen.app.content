@@ -2,15 +2,15 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'dolmen.app.content'
-version = '1.0a3'
+version = '1.0b1'
 readme = open(join('src', 'dolmen', 'app', 'content', 'README.txt')).read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
 install_requires = [
     'PIL',
-    'dolmen.app.site >= 0.1',
+    'dolmen.app.site',
     'dolmen.blob >= 0.5',
-    'dolmen.content >= 0.3.1',
+    'dolmen.content >= 0.7.0',
     'dolmen.file >= 0.5',
     'dolmen.forms.base',
     'dolmen.thumbnailer >= 0.2.1',
@@ -19,9 +19,13 @@ install_requires = [
     'grokcore.formlib',
     'martian',
     'setuptools',
+    'zope.annotation',
     'zope.browserresource',
+    'zope.dublincore',
+    'zope.i18nmessage',
     'zope.index',
     'zope.interface',
+    'zope.schema',
     ]
 
 tests_require = [
@@ -33,7 +37,6 @@ tests_require = [
     'zope.schema',
     'zope.security',
     'zope.site',
-    'zope.testing',
     'zope.traversing',
     ]
 

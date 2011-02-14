@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import martian
-from dolmen.content import BaseContent
+from dolmen.content import Content
 from dolmen.app.content import icon
 from grokcore.formlib import formlib
 from zope.interface import directlyProvides
@@ -9,7 +9,7 @@ from zope.browserresource.metaconfigure import icon as register_icon
 
 
 class ContentIconGrokker(martian.ClassGrokker):
-    martian.component(BaseContent)
+    martian.component(Content)
     martian.directive(icon)
 
     def execute(self, class_, config, icon, **kw):

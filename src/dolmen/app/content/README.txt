@@ -16,9 +16,12 @@ We import Grok and grok the package::
 
 We create a `dolmen.content` content::
 
-  >>> import dolmen.content
-  >>> class Mammoth(dolmen.content.Content):
-  ...    grok.name('A furry thing')
+  >>> from dolmen import content
+  >>> from dolmen.app.content import IDescriptiveSchema
+
+  >>> class Mammoth(content.Content):
+  ...    content.name('A furry thing')
+  ...    content.schema(IDescriptiveSchema)
 
   >>> testing.grok_component("mammoth", Mammoth)
   True
@@ -41,13 +44,18 @@ Indexes
 Base indexes
 ------------
 
-The `dolmen.app.content.indexes.BaseIndexes` handles the title and the content type of an IBaseContent content::
+`ContentIndexes` indexes the content type attribute if a
+``dolmen.content.interfaces.IContent`` object::
 
-  >>> indexes.BaseIndexes.__grok_indexes__
-  {'content_type': <grok.index.Field object at ...>, 'title': <grok.index.Text object at ...>}
+  >>> indexes.ContentIndexes.__grok_indexes__
+  {'content_type': <grok.index.Field object at ...>}
 
-  >>> indexes.BaseIndexes.__grok_indexes__['content_type']._attribute
-  '__content_type__'
+`DescriptiveIndexes` handles the title and the description of a
+content implementing `IDescriptiveSchema`::
+
+  >>> indexes.DescriptiveIndexes.__grok_indexes__
+  {'description': <grok.index.Text object at ...>,
+   'title': <grok.index.Text object at ...>}
 
 
 Searchable text
@@ -66,7 +74,7 @@ The adapter::
   >>> from zope.index.text.interfaces import ISearchableText
   >>> adapter = ISearchableText(manfred)
   >>> adapter.getSearchableText()
-  u'A nice mammoth'
+  (u'A nice mammoth', u'')
 
 
 Thumbnailing
@@ -121,7 +129,7 @@ Retrieving the icon
   >>> request = TestRequest()
   >>> icon_view = getMultiAdapter((manfred, request), name="icon")
   >>> icon_view()
-  '<img src="http://127.0.0.1/dolmen-content-interfaces-IContent-icon.png" alt="Content" width="16" height="16" border="0" />'
+  '<img src="http://127.0.0.1/dolmen-app-content-interfaces-IDescriptiveSchema-icon.png" alt="DescriptiveSchema" width="16" height="16" border="0" />'
 
 
 Defining a content icon
@@ -131,14 +139,14 @@ Let's demonstrate the icon registration with a simple test::
 
   >>> from zope import schema
 
-  >>> class IContentSchema(dolmen.content.IBaseContent):
+  >>> class IContentSchema(content.IContent):
   ...    text = schema.Text(title=u"A body text", default=u"N/A")
 
-  >>> class MyContent(dolmen.content.Content):
+  >>> class MyContent(content.Content):
   ...  """A simple content with an icon
   ...  """
-  ...  dolmen.content.schema(IContentSchema)
-  ...  dolmen.content.name("a simple content type")
+  ...  content.schema(IContentSchema)
+  ...  content.name("a simple content type")
   ...  icon('container.png')
 
   >>> testing.grok_component("mycontent", MyContent)
@@ -154,11 +162,11 @@ Now, we check if our content has a given icon::
 Trying to register an icon file that doesn't exist or cannot resolve
 will lead to an error::
 
-  >>> class AnotherContent(dolmen.content.Content):
+  >>> class AnotherContent(content.Content):
   ...  """Another content with an icon
   ...  """
-  ...  dolmen.content.schema(IContentSchema)
-  ...  dolmen.content.name("a simple content type")
+  ...  content.schema(IContentSchema)
+  ...  content.name("a simple content type")
   ...  icon('someimaginary thing.png')
   Traceback (most recent call last):
   ...

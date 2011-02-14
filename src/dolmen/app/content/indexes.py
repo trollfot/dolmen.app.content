@@ -1,25 +1,33 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import grok
 from grok import index
+from dolmen.content import IContent
 from dolmen.app.site import IDolmen
-from dolmen.content import IBaseContent
+from dolmen.app.content import IDescriptiveSchema
 from zope.index.text.interfaces import ISearchableText
 
 
-class BaseIndexes(grok.Indexes):
-    """Indexes the title and the content type of an IBaseContent content.
+class ContentIndexes(grok.Indexes):
+    """Indexes the content type of a ``dolmen.content`` `IContent`.
     """
     grok.site(IDolmen)
-    grok.context(IBaseContent)
-
-    title = index.Text()
+    grok.context(IContent)
     content_type = index.Field(attribute='__content_type__')
 
 
+class DescriptiveIndexes(grok.Indexes):
+    """Indexes the attributes of an `IDescriptiveSchema` content.
+    """
+    grok.site(IDolmen)
+    grok.context(IDescriptiveSchema)
+
+    title = index.Text()
+    description = index.Text()
+
+
 class SearchableIndex(grok.Indexes):
-    """Indexes the searchable text of an ISearchableText content.
+    """Indexes the searchable text of an `ISearchableText` content.
     """
     grok.site(IDolmen)
     grok.context(ISearchableText)
@@ -27,14 +35,16 @@ class SearchableIndex(grok.Indexes):
     searchabletext = index.Text(attribute="getSearchableText")
 
 
-class BaseSearchable(grok.Adapter):
-    """Provides the needed ISearchableText methods for and IBaseContent.
+class SearchableDescription(grok.Adapter):
+    """Provides the needed `ISearchableText` methods for
+    `IDescriptiveSchema`.
     """
     grok.implements(ISearchableText)
-    grok.context(IBaseContent)
+    grok.context(IDescriptiveSchema)
 
     def getSearchableText(self):
-        return self.context.title
+        return (self.context.title, self.context.description)
 
 
-__all__ = ['BaseIndexes', 'SearchableIndex', 'BaseSearchable']
+__all__ = ['ContentIndexes', 'DescriptiveIndexes',
+           'SearchableIndex', 'SearchableDescription']

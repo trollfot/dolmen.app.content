@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import unittest
+import unittest, doctest
 import dolmen.app.content
 import zope.component
 
 from zope.component.testlayer import ZCMLFileLayer
-from zope.testing import doctest
 from zope.site.folder import rootFolder
 from zope.site.site import LocalSiteManager
 
