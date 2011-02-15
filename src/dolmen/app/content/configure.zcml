@@ -1,4 +1,5 @@
 <configure xmlns="http://namespaces.zope.org/zope"
+	   xmlns:zcml="http://namespaces.zope.org/zcml"
            xmlns:grok="http://namespaces.zope.org/grok">
 
   <include package="grokcore.component" file="meta.zcml" />
@@ -8,4 +9,10 @@
   <grok:grok package=".meta" />
   <grok:grok package="." />
   
+  <!-- We use the 'zope' i18n domain.
+       We include the locales if availables -->
+  <include
+      zcml:condition="installed zope.app.locales"
+      package="zope.app.locales" />
+
 </configure>

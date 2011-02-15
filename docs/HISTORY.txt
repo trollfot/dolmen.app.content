@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0b2 (2011-02-15)
+------------------
+
+* Back to the use of ``zope.i18nmessageid`` instead of ``zope.i18nmessage``.
+
+* Added the condition inclusion of ``zope.app.locales``.
+
+
 1.0b1 (2011-02-14)
 ------------------
 

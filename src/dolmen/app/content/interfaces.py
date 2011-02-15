@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from zope.i18nmessage import MessageFactory
+from zope.i18nmessageid import MessageFactory
 from zope.schema import TextLine, Text
 from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.dublincore.interfaces import IDCDescriptiveProperties

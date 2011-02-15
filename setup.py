@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'dolmen.app.content'
-version = '1.0b1'
+version = '1.0b2'
 readme = open(join('src', 'dolmen', 'app', 'content', 'README.txt')).read()
 history = open(join('docs', 'HISTORY.txt')).read()
 
@@ -22,7 +22,7 @@ install_requires = [
     'zope.annotation',
     'zope.browserresource',
     'zope.dublincore',
-    'zope.i18nmessage',
+    'zope.i18nmessageid',
     'zope.index',
     'zope.interface',
     'zope.schema',
